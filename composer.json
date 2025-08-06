@@ -1,0 +1,12 @@
+{
+    "name": "root/cli",
+    "autoload": {
+        "psr-4": {
+            "Root\\Cli\\": "src/"
+        }
+    },
+    "require": {
+        "react/event-loop": "^1.5",
+        "clue/redis-react": "^2.8"
+    }
+}
