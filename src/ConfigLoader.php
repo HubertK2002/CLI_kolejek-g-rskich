@@ -2,7 +2,7 @@
 
 class ConfigLoader
 {
-	private const CONFIG_PATH = '/etc/kolejka_gorska/ci.env.config';
+	private const CONFIG_PATH = '../../config';
 	private static ?self $instance = null;
 	private array $config;
 
