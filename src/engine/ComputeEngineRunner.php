@@ -7,17 +7,20 @@ require_once __DIR__ . '/PersonnelComputeEngine.php';
 
 use App\Engine\ClientComputeEngine;
 use App\Engine\PersonnelComputeEngine;
+use App\CLI\RedisEventLogger;
 use ConfigLoader;
 
 class ComputeEngineRunner
 {
 	private string $env;
 	private \Redis $redis;
+	protected RedisEventLogger $logger;
 
 	public function __construct(string $env)
 	{
 		$this->env = $env;
 		$this->redis = getRedisClient($env);
+		$this->logger = new RedisEventLogger();
 	}
 
 	public function runForQueue(int $id): void
@@ -72,6 +75,11 @@ class ComputeEngineRunner
 			'last_updated' => date('c')
 		];
 
+		if($hasIssues) {
+			$this->logger->log("Błędy klientów w kolejce $id");
+			$this->logger->log(print_r($lines, 1));
+		}
+
 		file_put_contents(ConfigLoader::get('clients_dir') . "/{$id}.json", json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 	}
 
@@ -92,6 +100,11 @@ class ComputeEngineRunner
 			'lines' => [$line],
 			'last_updated' => date('c')
 		];
+
+		if($hasIssues) {
+			$this->logger->log("Błędy personelu w kolejce $id");
+			$this->logger->log(print_r($line, 1));
+		}
 
 		file_put_contents(ConfigLoader::get('personnel_dir') . "/{$id}.json", json_encode($output, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 	}
