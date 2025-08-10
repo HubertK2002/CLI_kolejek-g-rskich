@@ -1,5 +1,5 @@
 <?php
-namespace App;
+namespace App\Event;
 
 use React\EventLoop\LoopInterface;
 use App\ViewManager;

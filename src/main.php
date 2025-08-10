@@ -5,7 +5,7 @@ require_once 'utils.php';
 require_once 'redis_connector.php';
 require_once 'views/QueueView.php';
 require_once 'views/WagonView.php';
-require_once 'InputHandler.php';
+require_once 'event/InputHandler.php';
 require_once 'views/ViewManager.php';
 require_once 'views/PersonnelView.php';
 require_once 'views/ClientView.php';
@@ -15,7 +15,7 @@ require_once 'cli/RedisEventLogger.php';
 require_once 'notifications/NotificationManager.php';
 require_once 'ConfigLoader.php';
 
-use App\InputHandler;
+use App\Event\InputHandler;
 use App\views\RedisLogView;
 use React\EventLoop\Loop;
 use App\ViewManager;
