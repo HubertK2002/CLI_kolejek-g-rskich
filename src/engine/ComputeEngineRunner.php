@@ -76,7 +76,6 @@ class ComputeEngineRunner
 		];
 
 		if($hasIssues) {
-			$this->logger->log("Błędy klientów w kolejce $id");
 			$this->logger->log(print_r($lines, 1));
 		}
 
@@ -102,7 +101,6 @@ class ComputeEngineRunner
 		];
 
 		if($hasIssues) {
-			$this->logger->log("Błędy personelu w kolejce $id");
 			$this->logger->log(print_r($line, 1));
 		}
 
